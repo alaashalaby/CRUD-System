@@ -6,6 +6,10 @@ const submitBtn = document.getElementById("submitBtn");
 const form = document.querySelector("form");
 const tableContent = document.getElementById("tableContent");
 const noDataText = document.getElementById("noData");
+let userNameMsg = document.getElementById("userNameMsg");
+let emailMsg = document.getElementById("emailMsg");
+let phoneMsg = document.getElementById("phoneMsg");
+let jobMsg = document.getElementById("jobMsg");
 let usersList = [];
 let btnStatus = "Add User";
 
@@ -32,9 +36,11 @@ form.addEventListener("submit", (e) => {
 });
 
 submitBtn.addEventListener("click", () => {
-  addUserInfo();
-  displayUsersInfo();
-  resetInputs();
+  if (validateForm()) {
+    addUserInfo();
+    displayUsersInfo();
+    resetInputs();
+  }
 });
 
 // add user
@@ -57,7 +63,6 @@ function addUserInfo() {
     submitBtn.removeAttribute("data-id");
   }
   saveUsersToLocalStorage();
-  displayUsersInfo();
 }
 
 // display users
@@ -95,6 +100,11 @@ function resetInputs() {
   userEmailInput.value = "";
   userPhoneInput.value = "";
   userJobInput.value = "";
+  // Remove validation classes from all inputs
+  userNameInput.classList.remove("is-valid", "is-invalid");
+  userEmailInput.classList.remove("is-valid", "is-invalid");
+  userPhoneInput.classList.remove("is-valid", "is-invalid");
+  userJobInput.classList.remove("is-valid", "is-invalid");
 }
 
 // delete user
@@ -116,3 +126,52 @@ function editUser(id) {
   submitBtn.setAttribute("data-id", id);
   userNameInput.focus();
 }
+
+// Validate inputs
+function validateInputs(value, regex, messageElement, inputElement) {
+  if (regex.test(value.trim())) {
+    messageElement.classList.add("d-none");
+    inputElement.classList.add("is-valid");
+    inputElement.classList.remove("is-invalid");
+    return true;
+  } else {
+    messageElement.classList.remove("d-none");
+    inputElement.classList.add("is-invalid");
+    inputElement.classList.remove("is-valid");
+    return false;
+  }
+}
+
+// Validate form inputs
+function validateForm() {
+  const isValidName = validateInputs(
+    userNameInput.value,
+    /^[a-zA-Z\s]{3,16}$/,
+    userNameMsg,
+    userNameInput
+  );
+  const isValidEmail = validateInputs(
+    userEmailInput.value,
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    emailMsg,
+    userEmailInput
+  );
+  const isValidPhone = validateInputs(
+    userPhoneInput.value,
+    /^01[0125]\d{8}$/,
+    phoneMsg,
+    userPhoneInput
+  );
+  const isValidJob = validateInputs(
+    userJobInput.value,
+    /^[a-zA-Z\s]+$/,
+    jobMsg,
+    userJobInput
+  );
+  return isValidName && isValidEmail && isValidPhone && isValidJob;
+}
+// Event listeners
+userNameInput.addEventListener("input", validateForm);
+userEmailInput.addEventListener("input", validateForm);
+userPhoneInput.addEventListener("input", validateForm);
+userJobInput.addEventListener("input", validateForm);
