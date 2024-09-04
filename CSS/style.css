@@ -1,13 +1,70 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
 }
-html{
-    font-size: 62.5%;
+body {
+  background-color: #f4f4f4;
 }
-body{
-    font-size: 1.6rem;
-    background-color: #f4f4f4;
+h1 {
+  font-size: 3.2rem;
+  letter-spacing: 5px;
+}
+.input_box {
+  margin-bottom: 1.2em;
+}
+label {
+  font-size: 1.3em;
+  font-weight: 500;
+}
+input {
+  border: 1px solid #00a796 !important;
+  background-color: transparent !important;
+  padding: 1em !important;
+}
+input::placeholder {
+  color: #212529 !important;
+}
+#submitBtn {
+  background-color: #00a796;
+  color: #fff;
+  font-size: 1.3em;
+  font-weight: 600;
+  padding: 0.5em 2em;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #00a796;
+  transition: all 0.5s ease-in-out;
+}
+#submitBtn:hover {
+  background-color: transparent;
+  color: #00a796;
+}
+/* table */
+.table-wrapper {
+  background-color: rgba(255, 255, 255, 0.25);
+  border: 1px solid #aff8f1;
+  border-radius: 8px;
+  padding: 2em;
+}
+#editBtn,
+#deleteBtn {
+  font-size: 1.4em;
+  margin-inline: 10px;
+  line-height: initial;
+}
+#deleteBtn {
+  margin-inline: 0;
+}
+
+/* media query */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+    letter-spacing: normal;
+  }
+  .input_box {
+    margin-bottom: 0.9em;
+  }
 }
