@@ -175,3 +175,37 @@ userNameInput.addEventListener("input", validateForm);
 userEmailInput.addEventListener("input", validateForm);
 userPhoneInput.addEventListener("input", validateForm);
 userJobInput.addEventListener("input", validateForm);
+
+// search
+function searchByUserName() {
+  const searchInputValue = searchInput.value.trim().toLowerCase();
+  let content = ``;
+  for (let i = 0; i < usersList.length; i++) {
+    if (usersList[i].userName.toLowerCase().includes(searchInputValue)) {
+      content += `
+        <tr>
+              <td class="fw-bold">${i + 1}</td>
+              <td>${usersList[i].userName}</td>
+              <td>${usersList[i].userEmail}</td>
+              <td>${usersList[i].userPhone}</td>
+              <td>${usersList[i].userJob}</td>
+              <td class="d-flex justify-content-center align-items-center">
+                  <button id="editBtn" class="btn bg-info text-white"  onclick="editUser(${
+                    usersList[i].id
+                  })">
+                  <i class="bx bx-edit-alt"></i>
+                  </button>
+                  <button id="deleteBtn" class="btn bg-danger text-white" onclick="deleteUser(${
+                    usersList[i].id
+                  })">
+                  <i class="bx bx-trash"></i>
+                  </button>
+              </td>
+        </tr>`;
+    }
+  }
+  tableContent.innerHTML =
+    content ||
+    `<tr><td colspan="6" class="text-center fw-bold text-danger">No Data Found Matching with your search</td></tr>`;
+}
+searchInput.addEventListener("input", searchByUserName);
