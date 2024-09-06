@@ -47,6 +47,9 @@ padding: 1em;
 font-size: 1.2em;
 }
 /* table */
+input[type="search"]{
+  width: min(500px,100%);
+}
 .table-wrapper {
   background-color: rgba(255, 255, 255, 0.25);
   border: 1px solid #aff8f1;
