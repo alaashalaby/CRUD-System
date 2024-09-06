@@ -5,6 +5,8 @@ const userJobInput = document.getElementById("userJob");
 const submitBtn = document.getElementById("submitBtn");
 const form = document.querySelector("form");
 const tableContent = document.getElementById("tableContent");
+const tableWrapper = document.querySelector(".table-wrapper");
+const searchInput = document.getElementById("searchInput");
 const noDataText = document.getElementById("noData");
 let userNameMsg = document.getElementById("userNameMsg");
 let emailMsg = document.getElementById("emailMsg");
@@ -92,6 +94,18 @@ function displayUsersInfo() {
         `;
   }
   tableContent.innerHTML = content;
+  toggleDisplayTable();
+}
+
+// Toggle display table
+function toggleDisplayTable() {
+  if (usersList.length === 0) {
+    noDataText.classList.remove("d-none");
+    tableWrapper.classList.add("d-none");
+  } else {
+    noDataText.classList.add("d-none");
+    tableWrapper.classList.remove("d-none");
+  }
 }
 
 // reset inputs
